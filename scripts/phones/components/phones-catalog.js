@@ -5,12 +5,17 @@ export default class PhonesCatalogue {
         this._element = element;
         this._phones = phones;
 
+        this._onPhoneClick = this._onPhoneClick.bind(this);
+
         this._render();
 
         this._element.addEventListener('click', this._onPhoneClick)
         
     }
 
+    on(eventName, callback) {
+        this._element.addEventListener(eventName, callback);
+    }
     _onPhoneClick(event) {
         let phoneElement = event.target.closest('[data-element="phone"]')
 
@@ -18,8 +23,11 @@ export default class PhonesCatalogue {
             return;
         }
 
-        alert(phoneElement.dataset.phoneId);
+        let customEvent = new CustomEvent('phoneSelected', {
+            detail: phoneElement.dataset.phoneId
+        });
 
+        this._element.dispatchEvent(customEvent);
     }
     
     _render() {
