@@ -1,5 +1,6 @@
 'use strict';
 
+import PhonesService from "./services/phones-service.js";
 import PhonesCatalogue from './components/phones-catalog.js'
 
 export default class PhonesPage {
@@ -8,7 +9,7 @@ export default class PhonesPage {
 
         this._catalog = new PhonesCatalogue({
             element: this._element.querySelector('[data-component="phones-catalog"]'),
-            phones: [],
+            phones: PhonesService.getPhones(),
         })
     }
 }
