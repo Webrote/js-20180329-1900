@@ -1,6 +1,6 @@
-"use strict";
+'use strict';
 
-import PhonesCatalogue from './_components/phones-catalog.js'
+import PhonesCatalogue from './components/phones-catalog.js'
 
 export default class PhonesPage {
     constructor({ element }) {
