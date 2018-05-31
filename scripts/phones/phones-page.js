@@ -21,10 +21,13 @@ export default class PhonesPage {
 
         this._catalog.on('phoneSelected', (event) => {
             let phoneId = event.detail;
-            console.log(phoneId);
 
-            this._viewer.show();
-            this._catalog.hide();
+            PhonesService.loadPhone(phoneId, (phone) => {
+                this._viewer.show(phone);
+                this._catalog.hide();
+            })
+
+
         });
 
         this._catalog.on('add', (event) => {
