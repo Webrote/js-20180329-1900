@@ -12,9 +12,12 @@ export default class PhonesPage {
         this._element = element;
 
         this._catalog = new PhonesCatalogue({
-            element: this._element.querySelector('[data-component="phones-catalog"]'),
-            phones: PhonesService.getPhones(),
+            element: this._element.querySelector('[data-component="phones-catalog"]')
         });
+
+        PhonesService.loadPhones((phones) => {
+            this._catalog.setPones(phones);
+        })
 
         this._catalog.on('phoneSelected', (event) => {
             let phoneId = event.detail;
