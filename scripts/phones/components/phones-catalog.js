@@ -5,11 +5,9 @@ export default class PhonesCatalogue {
         this._element = element;
         this._phones = phones;
 
-        this._onPhoneClick = this._onPhoneClick.bind(this);
-
         this._render();
 
-        this._element.addEventListener('click', this._onPhoneClick)
+        this._element.addEventListener('click', this._onPhoneClick.bind(this));
         
     }
 
@@ -17,7 +15,7 @@ export default class PhonesCatalogue {
         this._element.addEventListener(eventName, callback);
     }
     _onPhoneClick(event) {
-        let phoneElement = event.target.closest('[data-element="phone"]')
+        let phoneElement = event.target.closest('[data-element="phone"]');
 
         if(!phoneElement) {
             return;
@@ -32,6 +30,7 @@ export default class PhonesCatalogue {
     
     _render() {
         this._element.innerHTML = `
+            <h2>Catalogue</h2>
             <ul class="phones">
                 ${ 
                     this._phones
@@ -44,10 +43,14 @@ export default class PhonesCatalogue {
                                         <img alt="${ phone.name }" 
                                              src="${ phone.imageUrl }">
                                     </a>
+                                    
+                                    <div class="phones__btn-buy-wrapper">
+                                        <a class="btn btn-success">Add</a>
+                                    </div>
                                     <a href="#!/phones//${ phone.id }">
                                         ${ phone.name }
                                     </a>
-                                        <p>${ phone.snippet }</p>
+                                    <p>${ phone.snippet }</p>
                                 </li>
                             `;
                         })
