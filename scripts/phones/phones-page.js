@@ -16,16 +16,23 @@ export default class PhonesPage {
             phones: PhonesService.getPhones(),
         });
 
-        //this._catalog._element.addEventListener('phoneSelected', (event)=> {
         this._catalog.on('phoneSelected', (event) => {
             let phoneId = event.detail;
             console.log(phoneId);
+
+            this._viewer.show();
+            this._catalog.hide();
         });
 
 
         this._viewer = new PhoneViewer({
             element: this._element.querySelector('[data-component="phone-viewer"]')
         });
+
+        this._viewer.on('back', () => {
+            this._viewer.hide();
+            this._catalog.show();
+        })
 
         this._shoppingCart = new ShoppingCart({
             element: this._element.querySelector('[data-component="shopping-cart"]')

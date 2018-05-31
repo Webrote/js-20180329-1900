@@ -1,10 +1,26 @@
 'use strict';
 
-export default class PhoneViewer {
+import Component from "../../component.js";
+
+export default class PhoneViewer extends Component{
     constructor({ element }) {
-        this._element = element;
+        super({element});
 
         this._render();
+
+        this._element.addEventListener('click', this._onBackButtonClick.bind(this))
+
+
+    }
+
+    _onBackButtonClick() {
+        let backButton = event.target.closest('[data-element="back-button"]');
+
+        if(!backButton) {
+            return;
+        }
+
+        this._trigger('back');
 
     }
 
@@ -14,7 +30,7 @@ export default class PhoneViewer {
             <div>
                 <img class="phone" src="img/phones/motorola-xoom-with-wi-fi.0.jpg">
             
-                <button>Back to list</button>
+                <button data-element="back-button">Back to list</button>
                 <button>Add to basket</button>
             
             
