@@ -24,6 +24,12 @@ export default class PhonesPage {
             this._catalog.hide();
         });
 
+        this._catalog.on('add', (event) => {
+            let phoneId = event.detail;
+
+            this._shoppingCart.addItem(phoneId);
+        });
+
 
         this._viewer = new PhoneViewer({
             element: this._element.querySelector('[data-component="phone-viewer"]')
